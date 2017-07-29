@@ -40,7 +40,7 @@ public class QuoteManager {
         }
     }
     
-    public void startRequestingSourceData(){
+    public void requestSourceData(){
         Contract sourceContract = this.getSourceContract();
         m_client.getSocket().reqMktData(TICKERID, sourceContract, "", false, false, null);
         LOG.debug("Sent market data request for source contract. ConId = " + sourceContract.conid());

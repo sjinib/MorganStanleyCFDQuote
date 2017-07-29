@@ -26,7 +26,7 @@ public class PositionManager {
         m_positions = new HashMap<Integer, Position>();
     }
     
-    public void startRequestingPosition(){
+    public void requestPosition(){
         m_client.getSocket().reqPositions();
         LOG.info("Sent reqPositions()");
     }

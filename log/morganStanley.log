@@ -358,3 +358,140 @@ java.lang.NullPointerException
 2017-07-28 19:07:52 296 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
 2017-07-28 19:07:52 296 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.13
 2017-07-28 19:07:52 296 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 20:46:22 438 INFO  [main] QuoteManager:35 - Initializing Quote Manager
+2017-07-28 20:46:22 442 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 20:46:22 443 INFO  [main] PositionManager:24 - Initializing Position Manager
+2017-07-28 20:46:22 446 INFO  [main] MainQuoteEngine:33 - Starting Morgan Stanley Quote Test
+2017-07-28 20:46:22 491 INFO  [Thread-2] IBClient:268 - Account list: DU15046
+2017-07-28 20:46:22 492 INFO  [Thread-2] IBClient:205 - Next Valid Id: [1]
+2017-07-28 20:46:22 492 ERROR [Thread-2] IBClient:438 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 20:46:22 493 ERROR [Thread-2] IBClient:438 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 20:46:22 691 INFO  [Thread-3] IBClient:74 - Starting IB Client
+2017-07-28 20:46:22 698 DEBUG [Thread-3] QuoteManager:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 20:46:22 699 INFO  [Thread-3] PositionManager:31 - Sent reqPositions()
+2017-07-28 20:46:22 699 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:22 704 INFO  [Thread-2] IBClient:581 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 20:46:22 717 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.91
+2017-07-28 20:46:22 717 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.91, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 20:46:22 717 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.92
+2017-07-28 20:46:22 719 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.92, askPrice_calculated = -1.0, midPoint_n225m = 147.91
+2017-07-28 20:46:22 720 DEBUG [Thread-2] IBClient:365 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 20:46:22 721 INFO  [Thread-2] PositionManager:46 - Updated position:{236950077=com.ib.position.Position@14dd9f9}
+2017-07-28 20:46:22 722 DEBUG [Thread-2] IBClient:365 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 20:46:22 722 INFO  [Thread-2] PositionManager:46 - Updated position:{236950077=com.ib.position.Position@14dd9f9, 265598=com.ib.position.Position@146d7a5}
+2017-07-28 20:46:22 722 DEBUG [Thread-2] IBClient:365 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 300.0, Avg cost: 147.57
+2017-07-28 20:46:22 722 INFO  [Thread-2] PositionManager:46 - Updated position:{236950077=com.ib.position.Position@14dd9f9, 265598=com.ib.position.Position@146d7a5, 8314=com.ib.position.Position@10de41a}
+2017-07-28 20:46:25 810 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.93
+2017-07-28 20:46:25 811 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.93, askPrice_calculated = -1.0, midPoint_n225m = 147.92
+2017-07-28 20:46:27 563 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.92
+2017-07-28 20:46:27 563 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.92, bidPrice_calculated = -1.0, midPoint_n225m = 147.93
+2017-07-28 20:46:27 564 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.94
+2017-07-28 20:46:27 564 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.94, askPrice_calculated = -1.0, midPoint_n225m = 147.93
+2017-07-28 20:46:27 699 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:32 700 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:34 072 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:46:34 072 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:46:34 073 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.95
+2017-07-28 20:46:34 074 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.95, askPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:46:37 700 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:42 700 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:43 581 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.92
+2017-07-28 20:46:43 582 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.92, bidPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:46:43 582 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.94
+2017-07-28 20:46:43 583 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.94, askPrice_calculated = -1.0, midPoint_n225m = 147.93
+2017-07-28 20:46:45 584 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:46:45 585 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:46:45 585 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.95
+2017-07-28 20:46:45 585 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.95, askPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:46:47 700 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:48 334 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:46:48 334 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:46:48 821 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:46:48 821 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:46:50 884 DEBUG [Thread-2] IBClient:365 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 300.0, Avg cost: 147.98333333333332
+2017-07-28 20:46:50 884 INFO  [Thread-2] PositionManager:46 - Updated position:{236950077=com.ib.position.Position@14dd9f9, 265598=com.ib.position.Position@c34ba7, 8314=com.ib.position.Position@10de41a}
+2017-07-28 20:46:50 885 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:46:50 885 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:46:52 701 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:46:57 631 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:46:57 631 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:46:57 631 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.97
+2017-07-28 20:46:57 632 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.97, askPrice_calculated = -1.0, midPoint_n225m = 147.96
+2017-07-28 20:46:57 701 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:00 598 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:47:00 599 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:00 599 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:47:00 600 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:02 701 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:06 611 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.95
+2017-07-28 20:47:06 611 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.95, askPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:47:07 702 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:12 702 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:15 363 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:47:15 364 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:17 702 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:18 617 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.95
+2017-07-28 20:47:18 618 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.95, askPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:47:21 370 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:47:21 370 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:22 702 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:24 627 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:47:24 627 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:24 628 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.97
+2017-07-28 20:47:24 628 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.97, askPrice_calculated = -1.0, midPoint_n225m = 147.96
+2017-07-28 20:47:27 627 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:47:27 628 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:27 628 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:47:27 628 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:27 703 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:30 387 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.92
+2017-07-28 20:47:30 387 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.92, bidPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:47:30 388 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.94
+2017-07-28 20:47:30 388 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.94, askPrice_calculated = -1.0, midPoint_n225m = 147.93
+2017-07-28 20:47:32 703 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:33 634 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:47:33 635 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:47:33 635 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.95
+2017-07-28 20:47:33 637 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.95, askPrice_calculated = -1.0, midPoint_n225m = 147.94
+2017-07-28 20:47:36 635 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:47:36 636 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:37 703 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:42 645 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:47:42 645 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:42 645 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.97
+2017-07-28 20:47:42 646 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.97, askPrice_calculated = -1.0, midPoint_n225m = 147.96
+2017-07-28 20:47:42 704 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:45 648 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:47:45 648 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:45 648 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:47:45 649 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:47 704 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:48 672 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:47:48 672 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:47:48 672 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.97
+2017-07-28 20:47:48 673 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.97, askPrice_calculated = -1.0, midPoint_n225m = 147.96
+2017-07-28 20:47:52 705 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:47:57 705 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:48:02 706 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:48:03 667 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:48:03 668 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:03 668 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:48:03 669 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:06 671 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:48:06 671 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:06 677 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.97
+2017-07-28 20:48:06 677 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.97, askPrice_calculated = -1.0, midPoint_n225m = 147.96
+2017-07-28 20:48:07 706 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:48:09 675 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:48:09 675 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:09 676 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:48:09 676 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:12 677 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.95
+2017-07-28 20:48:12 677 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.95, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:12 678 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.97
+2017-07-28 20:48:12 678 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.97, askPrice_calculated = -1.0, midPoint_n225m = 147.96
+2017-07-28 20:48:12 706 DEBUG [Thread-3] OrderManager:41 - ------------Not trading in order manager----------
+2017-07-28 20:48:15 681 DEBUG [Thread-2] IBClient:84 - Received Bid Price = 147.94
+2017-07-28 20:48:15 682 DEBUG [Thread-2] QuoteManager:55 - Updated info: bidPrice_n225m = 147.94, bidPrice_calculated = -1.0, midPoint_n225m = 147.95
+2017-07-28 20:48:15 682 DEBUG [Thread-2] IBClient:87 - Received Ask Price = 147.96
+2017-07-28 20:48:15 682 DEBUG [Thread-2] QuoteManager:65 - Updated info: askPrice_n225m = 147.96, askPrice_calculated = -1.0, midPoint_n225m = 147.95

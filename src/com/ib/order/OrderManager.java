@@ -19,7 +19,7 @@ import com.ib.position.*;
  *
  * @author Siteng Jin
  */
-public class OrderManager {
+public class OrderManager{
     private static final Logger LOG = Logger.getLogger(OrderManager.class);
     
     private IBClient m_client = null; 
@@ -36,7 +36,18 @@ public class OrderManager {
     }
     
     public void startTrade(){
-        
+        while(true){
+            try{
+                LOG.debug("------------Not trading in order manager----------");
+                Thread.sleep(5000);
+            } catch (Exception e){
+                
+            }
+        }
+    }
+    
+    public void requestOpenOrder(){
+        m_client.getSocket().reqOpenOrders();
     }
     
     public synchronized void updateOrder(OrderidConidAction orderidConidAction, Order order){
@@ -77,7 +88,7 @@ public class OrderManager {
         return true;
     }
     
-    private boolean calculateDynamicOffset(){
+    private synchronized boolean calculateDynamicOffset(){
         ConfigReader configReader = ConfigReader.getInstance();
         int tradeConid = Integer.parseInt(configReader.getConfig(Configs.TRADE_CONID));
         double pos = m_client.getPositionManager().getPosition(tradeConid);
@@ -86,7 +97,7 @@ public class OrderManager {
         return true;
     }
     
-    private boolean findStaticOffset(){
+    private synchronized boolean findStaticOffset(){
         ConfigReader configReader = ConfigReader.getInstance();
         staticOffset = Double.parseDouble(configReader.getConfig(Configs.STATIC_OFFSET));
         return true;

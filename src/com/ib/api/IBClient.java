@@ -5,16 +5,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
 import com.ib.client.*;
+import com.ib.config.ConfigReader;
+import com.ib.config.Configs;
 import com.ib.quote.QuoteManager;
 import com.ib.position.*;
 import com.ib.order.*;
 
 public class IBClient implements EWrapper {
         private static final Logger LOG = Logger.getLogger(IBClient.class);
+        
+        public static final Lock lock = new ReentrantLock();
     
         protected static IBClient _instance = null;
         protected static QuoteManager m_quoteManager = null;
@@ -65,10 +71,16 @@ public class IBClient implements EWrapper {
             return m_quoteManager;
         }
         
+        public OrderManager getOrderManager(){
+            return m_orderManager;
+        }
+        
+        // Test start
         public void start(){
             LOG.info("Starting IB Client");
-            m_quoteManager.startRequestingSourceData();
-            m_positionManager.startRequestingPosition();
+            m_quoteManager.requestSourceData();
+            m_positionManager.requestPosition();
+            IBClient.m_orderManager.startTrade();
         }
 	
 	 //! [tickprice]
@@ -134,7 +146,11 @@ public class IBClient implements EWrapper {
 		//System.out.println("OrderStatus. Id: "+orderId+", Status: "+status+", Filled"+filled+", Remaining: "+remaining
                 //+", AvgFillPrice: "+avgFillPrice+", PermId: "+permId+", ParentId: "+parentId+", LastFillPrice: "+lastFillPrice+
                 //", ClientId: "+clientId+", WhyHeld: "+whyHeld+", MktCapPrice: "+mktCapPrice);
-	}
+                LOG.debug("OrderStatus. Id: "+orderId+", Status: "+status+", Filled"+filled+", Remaining: "+remaining
+                +", AvgFillPrice: "+avgFillPrice+", PermId: "+permId+", ParentId: "+parentId+", LastFillPrice: "+lastFillPrice+
+                ", ClientId: "+clientId+", WhyHeld: "+whyHeld+", MktCapPrice: "+mktCapPrice);
+                
+        }
 	//! [orderstatus]
 	
 	//! [openorder]
@@ -145,8 +161,11 @@ public class IBClient implements EWrapper {
 		//	order.action()+", "+order.orderType()+" "+order.totalQuantity()+", "+orderState.status());
                 LOG.debug("OpenOrder. ID: "+orderId+", "+contract.symbol()+", "+contract.secType()+" @ "+contract.exchange()+": "+
 			order.action()+", "+order.orderType()+" "+order.totalQuantity()+", "+orderState.status());
-                OrderidConidAction orderidConidAction = new OrderidConidAction(orderId, contract.conid(), order.action());
-                m_orderManager.updateOrder(orderidConidAction, order);
+                if(contract.conid() == Integer.parseInt(ConfigReader.getInstance().getConfig(Configs.TRADE_CONID))){
+                    // Only takes order info for the TRADE CONID
+                    OrderidConidAction orderidConidAction = new OrderidConidAction(orderId, contract.conid(), order.action());
+                    m_orderManager.updateOrder(orderidConidAction, order);
+                }
         }
 	//! [openorder]
 	
@@ -357,8 +376,11 @@ public class IBClient implements EWrapper {
 			double avgCost) {
 		//System.out.println("Position. "+account+" - Symbol: "+contract.symbol()+", SecType: "+contract.secType()+", Currency: "+contract.currency()+", Position: "+pos+", Avg cost: "+avgCost);
                 LOG.debug("Position. "+account+" - Symbol: "+contract.symbol()+", SecType: "+contract.secType()+", Currency: "+contract.currency()+", Position: "+pos+", Avg cost: "+avgCost);
-                Position position = new Position(account, contract, pos, avgCost);
-                m_positionManager.updatePosition(position);
+                if(contract.conid() == Integer.parseInt(ConfigReader.getInstance().getConfig(Configs.TRADE_CONID))){
+                    // Only takes order info for the TRADE CONID
+                    Position position = new Position(account, contract, pos, avgCost);
+                    m_positionManager.updatePosition(position);
+                }
         }
 	//! [position]
 	

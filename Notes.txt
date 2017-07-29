@@ -1,0 +1,20 @@
+1. Maintain two orders on each side
+2. When there is source data update and no order execution, modify the price of the order
+3. When there is execution, cancel the order and resubmit the order using new data
+
+Other situations:
+1. Order canceled - resubmit order
+2. Order rejected - resubmit order
+
+Work flow:
+1. Check open orders
+	if no order, place order
+	(update source data should automatically update order if needed)
+	if order status has filled - resubmit order
+	
+2. Monitor update source data to update order accordingly
+3. Monitor execution to update order accordingly
+
+Next step:
+OpenOrder lock for OrderManager
+Position lock for PositionManager
