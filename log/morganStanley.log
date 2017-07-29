@@ -1,0 +1,360 @@
+2017-07-28 17:15:17 DEBUG ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=12345, TRADE_CONID=54321, ACCOUNT=U1234567, DISTORTION_RATE=0.05, STATIC_OFFSET=1, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 17:20:23 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=12345, TRADE_CONID=54321, ACCOUNT=U1234567, DISTORTION_RATE=0.05, STATIC_OFFSET=1, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 18:01:00 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 18:01:00 INFO  [main] IBClient:31 - Initializing Quote Manager
+2017-07-28 18:01:00 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 18:01:00 DEBUG [main] IBClient:42 - Sent market data request for source contract. ConId = 265598
+2017-07-28 18:01:01 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.17
+2017-07-28 18:01:01 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.17, bidPrice_calculated = -1.0
+2017-07-28 18:01:01 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.19
+2017-07-28 18:01:01 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.19, askPrice_calculated = -1.0
+2017-07-28 18:01:03 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.16
+2017-07-28 18:01:03 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.16, bidPrice_calculated = -1.0
+2017-07-28 18:01:03 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.18
+2017-07-28 18:01:03 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.18, askPrice_calculated = -1.0
+2017-07-28 18:01:06 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.17
+2017-07-28 18:01:06 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.17, bidPrice_calculated = -1.0
+2017-07-28 18:01:06 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.19
+2017-07-28 18:01:06 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.19, askPrice_calculated = -1.0
+2017-07-28 18:08:00 959 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 18:08:00 987 INFO  [main] IBClient:31 - Initializing Quote Manager
+2017-07-28 18:08:00 989 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 18:08:01 015 INFO  [Thread-2] IBClient:241 - Account list: DU15046
+2017-07-28 18:08:01 017 INFO  [Thread-2] IBClient:178 - Next Valid Id: [1]
+2017-07-28 18:08:01 017 ERROR [Thread-2] IBClient:408 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 18:08:01 017 ERROR [Thread-2] IBClient:408 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 18:08:01 218 DEBUG [main] IBClient:42 - Sent market data request for source contract. ConId = 265598
+2017-07-28 18:08:01 223 INFO  [Thread-2] IBClient:551 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 18:08:01 236 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.25
+2017-07-28 18:08:01 236 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.25, bidPrice_calculated = -1.0
+2017-07-28 18:08:01 237 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.27
+2017-07-28 18:08:01 237 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.27, askPrice_calculated = -1.0
+2017-07-28 18:08:03 798 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.27
+2017-07-28 18:08:03 799 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.27, bidPrice_calculated = -1.0
+2017-07-28 18:08:03 799 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.28
+2017-07-28 18:08:03 803 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.28, askPrice_calculated = -1.0
+2017-07-28 18:08:10 053 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.29
+2017-07-28 18:08:10 053 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.29, askPrice_calculated = -1.0
+2017-07-28 18:08:16 558 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.28
+2017-07-28 18:08:16 559 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.28, askPrice_calculated = -1.0
+2017-07-28 18:08:25 066 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.25
+2017-07-28 18:08:25 066 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.25, bidPrice_calculated = -1.0
+2017-07-28 18:08:25 067 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.27
+2017-07-28 18:08:25 067 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.27, askPrice_calculated = -1.0
+2017-07-28 18:08:28 070 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.26
+2017-07-28 18:08:28 070 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.26, askPrice_calculated = -1.0
+2017-07-28 18:08:34 578 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.23
+2017-07-28 18:08:34 578 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.23, bidPrice_calculated = -1.0
+2017-07-28 18:08:34 579 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.25
+2017-07-28 18:08:34 579 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.25, askPrice_calculated = -1.0
+2017-07-28 18:08:37 830 INFO  [Thread-2] IBClient:62 - Wrapper Received Bid Price = 148.25
+2017-07-28 18:08:37 830 DEBUG [Thread-2] IBClient:47 - Updated info: bidPrice_n225m = 148.25, bidPrice_calculated = -1.0
+2017-07-28 18:08:37 831 INFO  [Thread-2] IBClient:65 - Wrapper Received Ask Price = 148.26
+2017-07-28 18:08:37 831 DEBUG [Thread-2] IBClient:52 - Updated info: askPrice_n225m = 148.26, askPrice_calculated = -1.0
+2017-07-28 18:58:10 574 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 18:58:10 588 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 18:58:10 590 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 18:58:10 591 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 18:58:10 622 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 18:58:10 623 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 18:58:10 624 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 18:58:10 624 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 18:58:10 822 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 18:58:10 826 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 18:58:10 826 INFO  [main] IBClient:30 - Sent reqPositions()
+2017-07-28 18:58:10 829 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 18:58:10 837 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.08
+2017-07-28 18:58:10 837 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.08, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 18:58:10 837 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.09
+2017-07-28 18:58:10 853 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.09, askPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:10 855 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 18:58:10 857 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 18:58:10 857 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 18:58:10 857 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 18:58:12 121 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.1
+2017-07-28 18:58:12 122 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.1, askPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:15 878 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.09
+2017-07-28 18:58:15 879 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.09, bidPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:15 879 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.11
+2017-07-28 18:58:15 880 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.11, askPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 18:58:18 131 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.08
+2017-07-28 18:58:18 132 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.08, bidPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 18:58:18 133 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.1
+2017-07-28 18:58:18 133 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.1, askPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:21 133 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.09
+2017-07-28 18:58:21 134 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.09, bidPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:21 135 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.11
+2017-07-28 18:58:21 135 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.11, askPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 18:58:27 929 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 0.0, Avg cost: 0.0
+2017-07-28 18:58:27 929 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 18:58:27 929 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.55
+2017-07-28 18:58:27 930 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 18:58:33 438 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.08
+2017-07-28 18:58:33 439 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.08, bidPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 18:58:33 440 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.1
+2017-07-28 18:58:33 440 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.1, askPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:46 451 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.09
+2017-07-28 18:58:46 451 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.09, askPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 18:58:55 966 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.06
+2017-07-28 18:58:55 967 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.06, bidPrice_calculated = -1.0, midPoint_n225m = 148.07
+2017-07-28 18:58:55 967 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.08
+2017-07-28 18:58:55 967 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.08, askPrice_calculated = -1.0, midPoint_n225m = 148.07
+2017-07-28 18:59:14 045 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 18:59:14 060 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 18:59:14 061 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 18:59:14 062 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 18:59:14 089 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 18:59:14 090 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 18:59:14 090 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 18:59:14 090 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 18:59:14 288 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 18:59:14 295 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 18:59:14 295 INFO  [main] IBClient:30 - Sent reqPositions()
+2017-07-28 18:59:14 302 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 18:59:14 315 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.05
+2017-07-28 18:59:14 316 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.05, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 18:59:14 316 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.07
+2017-07-28 18:59:14 316 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.07, askPrice_calculated = -1.0, midPoint_n225m = 148.06
+2017-07-28 18:59:14 319 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 18:59:14 320 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 18:59:14 356 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 18:59:14 356 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 18:59:14 482 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 18:59:14 483 ERROR [Thread-2] TestQuotes:43 - 
+2017-07-28 19:00:07 108 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 19:00:07 122 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 19:00:07 124 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 19:00:07 125 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 19:00:07 152 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 19:00:07 153 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 19:00:07 154 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 19:00:07 154 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 19:00:07 351 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 19:00:07 356 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 19:00:07 357 INFO  [main] IBClient:30 - Sent reqPositions()
+2017-07-28 19:00:07 362 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 19:00:07 374 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.08
+2017-07-28 19:00:07 375 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.08, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 19:00:07 375 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.09
+2017-07-28 19:00:07 376 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.09, askPrice_calculated = -1.0, midPoint_n225m = 148.09
+2017-07-28 19:00:07 381 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 19:00:07 383 ERROR [Thread-2] TestQuotes:43 - [Ljava.lang.StackTraceElement;@1f0f57b
+2017-07-28 19:00:07 384 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 19:00:07 384 ERROR [Thread-2] TestQuotes:43 - [Ljava.lang.StackTraceElement;@9bb36
+2017-07-28 19:00:07 810 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 19:00:07 811 ERROR [Thread-2] TestQuotes:43 - [Ljava.lang.StackTraceElement;@1d53c69
+2017-07-28 19:00:08 790 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.06
+2017-07-28 19:00:08 790 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.06, bidPrice_calculated = -1.0, midPoint_n225m = 148.07
+2017-07-28 19:00:08 791 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.08
+2017-07-28 19:00:08 791 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.08, askPrice_calculated = -1.0, midPoint_n225m = 148.07
+2017-07-28 19:01:14 203 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 19:01:14 217 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 19:01:14 218 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 19:01:14 219 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 19:01:14 245 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 19:01:14 246 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 19:01:14 246 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 19:01:14 247 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 19:01:14 444 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 19:01:14 447 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 19:01:14 447 INFO  [main] IBClient:30 - Sent reqPositions()
+2017-07-28 19:01:14 450 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 19:01:14 457 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.09
+2017-07-28 19:01:14 457 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.09, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 19:01:14 457 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.11
+2017-07-28 19:01:14 458 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.11, askPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 19:01:14 461 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 19:01:14 462 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+2017-07-28 19:01:14 462 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 19:01:14 462 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+2017-07-28 19:01:14 612 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 19:01:14 612 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+2017-07-28 19:02:10 136 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 19:02:10 150 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 19:02:10 152 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 19:02:10 153 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 19:02:10 179 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 19:02:10 180 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 19:02:10 180 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 19:02:10 181 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 19:02:10 378 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 19:02:10 381 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 19:02:10 381 INFO  [main] IBClient:30 - Sent reqPositions()
+2017-07-28 19:02:10 384 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 19:02:10 398 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.12
+2017-07-28 19:02:10 398 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.12, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 19:02:10 398 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.14
+2017-07-28 19:02:10 399 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.14, askPrice_calculated = -1.0, midPoint_n225m = 148.13
+2017-07-28 19:02:10 404 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 19:02:10 406 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+2017-07-28 19:02:10 407 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 19:02:10 407 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+2017-07-28 19:02:10 421 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 19:02:10 421 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+2017-07-28 19:03:47 043 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+ mainhrowable{10}2017-07-28 19:03:47 058 INFO  [main] IBClient:35 - Initializing Quote Manager
+ mainhrowable{10}2017-07-28 19:03:47 060 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+ mainhrowable{10}2017-07-28 19:03:47 061 INFO  [main] IBClient:24 - Initializing Position Manager
+ mainhrowable{10}2017-07-28 19:03:47 087 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+ Thread-2hrowable{10}2017-07-28 19:03:47 088 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+ Thread-2hrowable{10}2017-07-28 19:03:47 089 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+ Thread-2hrowable{10}2017-07-28 19:03:47 090 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+ Thread-2hrowable{10}2017-07-28 19:03:47 286 INFO  [main] IBClient:62 - Starting IB Client
+ mainhrowable{10}2017-07-28 19:03:47 289 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+ mainhrowable{10}2017-07-28 19:03:47 290 INFO  [main] IBClient:30 - Sent reqPositions()
+ mainhrowable{10}2017-07-28 19:03:47 303 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+ Thread-2hrowable{10}2017-07-28 19:03:47 307 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.16
+ Thread-2hrowable{10}2017-07-28 19:03:47 307 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.16, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+ Thread-2hrowable{10}2017-07-28 19:03:47 308 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.17
+ Thread-2hrowable{10}2017-07-28 19:03:47 308 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.17, askPrice_calculated = -1.0, midPoint_n225m = 148.16
+ Thread-2hrowable{10}2017-07-28 19:03:47 311 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+ Thread-2hrowable{10}2017-07-28 19:03:47 312 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+ Thread-2hrowable{10}2017-07-28 19:03:48 279 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+ Thread-2hrowable{10}2017-07-28 19:03:48 281 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+ Thread-2hrowable{10}2017-07-28 19:03:48 282 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+ Thread-2hrowable{10}2017-07-28 19:03:48 282 ERROR [Thread-2] TestQuotes:43 - java.lang.NullPointerException
+ Thread-2hrowable{10}2017-07-28 19:03:50 784 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.14
+ Thread-2hrowable{10}2017-07-28 19:03:50 785 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.14, bidPrice_calculated = -1.0, midPoint_n225m = 148.15
+ Thread-2hrowable{10}2017-07-28 19:03:50 785 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.16
+ Thread-2hrowable{10}2017-07-28 19:03:50 786 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.16, askPrice_calculated = -1.0, midPoint_n225m = 148.15
+ Thread-2hrowable{10}2017-07-28 19:04:47 362 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 19:04:47 376 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 19:04:47 378 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 19:04:47 379 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 19:04:47 405 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 19:04:47 406 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 19:04:47 407 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 19:04:47 407 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 19:04:47 605 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 19:04:47 610 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 19:04:47 611 INFO  [main] IBClient:30 - Sent reqPositions()
+2017-07-28 19:04:47 616 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 19:04:47 630 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.12
+2017-07-28 19:04:47 631 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.12, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 19:04:47 631 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.14
+2017-07-28 19:04:47 632 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.14, askPrice_calculated = -1.0, midPoint_n225m = 148.13
+2017-07-28 19:04:47 637 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 19:04:47 639 ERROR [Thread-2] TestQuotes:43 - 
+java.lang.NullPointerException
+	at com.ib.position.PositionManager.updatePosition(PositionManager.java:40)
+	at com.ib.api.IBClient.position(IBClient.java:349)
+	at com.ib.client.EDecoder.processPositionMsg(EDecoder.java:1905)
+	at com.ib.client.EDecoder.processMsg(EDecoder.java:178)
+	at com.ib.client.EReader.processMsgs(EReader.java:110)
+	at test.TestQuotes$1.run(TestQuotes.java:41)
+2017-07-28 19:04:47 682 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 19:04:47 683 ERROR [Thread-2] TestQuotes:43 - 
+java.lang.NullPointerException
+	at com.ib.position.PositionManager.updatePosition(PositionManager.java:40)
+	at com.ib.api.IBClient.position(IBClient.java:349)
+	at com.ib.client.EDecoder.processPositionMsg(EDecoder.java:1905)
+	at com.ib.client.EDecoder.processMsg(EDecoder.java:178)
+	at com.ib.client.EReader.processMsgs(EReader.java:110)
+	at test.TestQuotes$1.run(TestQuotes.java:41)
+2017-07-28 19:04:48 595 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 19:04:48 595 ERROR [Thread-2] TestQuotes:43 - 
+java.lang.NullPointerException
+	at com.ib.position.PositionManager.updatePosition(PositionManager.java:40)
+	at com.ib.api.IBClient.position(IBClient.java:349)
+	at com.ib.client.EDecoder.processPositionMsg(EDecoder.java:1905)
+	at com.ib.client.EDecoder.processMsg(EDecoder.java:178)
+	at com.ib.client.EReader.processMsgs(EReader.java:110)
+	at test.TestQuotes$1.run(TestQuotes.java:41)
+2017-07-28 19:04:50 349 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.11
+2017-07-28 19:04:50 350 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:04:50 350 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.13
+2017-07-28 19:04:50 351 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:04:53 354 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.09
+2017-07-28 19:04:53 355 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.09, bidPrice_calculated = -1.0, midPoint_n225m = 148.11
+2017-07-28 19:04:53 356 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.11
+2017-07-28 19:04:53 356 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.11, askPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 19:06:06 193 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 19:06:06 207 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 19:06:06 209 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 19:06:06 210 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 19:06:06 237 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 19:06:06 238 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 19:06:06 238 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 19:06:06 239 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 19:06:06 435 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 19:06:06 440 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 19:06:06 440 INFO  [main] IBClient:31 - Sent reqPositions()
+2017-07-28 19:06:06 444 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 19:06:06 457 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.11
+2017-07-28 19:06:06 457 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 19:06:06 458 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.12
+2017-07-28 19:06:06 459 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.12, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:06:06 464 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 19:06:06 465 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@266182}
+2017-07-28 19:06:06 466 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 19:06:06 466 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@266182, 265598=com.ib.position.Position@d8e7f1}
+2017-07-28 19:06:06 466 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 19:06:06 467 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@266182, 265598=com.ib.position.Position@d8e7f1, 8314=com.ib.position.Position@cbd2fc}
+2017-07-28 19:06:10 187 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.13
+2017-07-28 19:06:10 187 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:06:16 194 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.12
+2017-07-28 19:06:16 194 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.12, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:06:16 195 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.14
+2017-07-28 19:06:16 196 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.14, askPrice_calculated = -1.0, midPoint_n225m = 148.13
+2017-07-28 19:06:19 199 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.11
+2017-07-28 19:06:19 200 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:06:19 201 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.13
+2017-07-28 19:06:19 202 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:06:21 951 INFO  [Thread-2] IBClient:71 - Wrapper Received Bid Price = 148.12
+2017-07-28 19:06:21 952 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.12, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:06:21 953 INFO  [Thread-2] IBClient:74 - Wrapper Received Ask Price = 148.14
+2017-07-28 19:06:21 953 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.14, askPrice_calculated = -1.0, midPoint_n225m = 148.13
+2017-07-28 19:07:10 759 INFO  [main] TestQuotes:26 - Starting Morgan Stanley Quote Test
+2017-07-28 19:07:10 773 INFO  [main] IBClient:35 - Initializing Quote Manager
+2017-07-28 19:07:10 775 DEBUG [main] ConfigReader:56 - Successfully loaded config: {SOURCE_CONID=265598, TRADE_CONID=8314, ACCOUNT=DU15046, DISTORTION_RATE=0.005, STATIC_OFFSET=0.05, POSITION_ADJUSTMENT=100, ORDER_SIZE_DEFAULT=1000}
+2017-07-28 19:07:10 776 INFO  [main] IBClient:24 - Initializing Position Manager
+2017-07-28 19:07:10 802 INFO  [Thread-2] IBClient:250 - Account list: DU15046
+2017-07-28 19:07:10 803 INFO  [Thread-2] IBClient:187 - Next Valid Id: [1]
+2017-07-28 19:07:10 803 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2104, Msg: Market data farm connection is OK:ibdemo
+2017-07-28 19:07:10 804 ERROR [Thread-2] IBClient:420 - Error. Id: -1, Code: 2106, Msg: HMDS data farm connection is OK:demohmds
+2017-07-28 19:07:11 000 INFO  [main] IBClient:62 - Starting IB Client
+2017-07-28 19:07:11 006 DEBUG [main] IBClient:46 - Sent market data request for source contract. ConId = 265598
+2017-07-28 19:07:11 006 INFO  [main] IBClient:31 - Sent reqPositions()
+2017-07-28 19:07:11 011 INFO  [Thread-2] IBClient:563 - Tick req params. Ticker Id:1000, Min tick: 0.01, bbo exchange: 9c, Snapshot permissions: 3
+2017-07-28 19:07:11 022 INFO  [Thread-2] IBClient:71 - Received Bid Price = 148.12
+2017-07-28 19:07:11 023 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.12, bidPrice_calculated = -1.0, midPoint_n225m = -1.0
+2017-07-28 19:07:11 023 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.14
+2017-07-28 19:07:11 023 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.14, askPrice_calculated = -1.0, midPoint_n225m = 148.13
+2017-07-28 19:07:11 027 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: ES, SecType: FUT, Currency: USD, Position: 2.0, Avg cost: 122702.4
+2017-07-28 19:07:11 028 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@dd8722}
+2017-07-28 19:07:11 029 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: AAPL, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 148.0
+2017-07-28 19:07:11 029 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@dd8722, 265598=com.ib.position.Position@1c16549}
+2017-07-28 19:07:11 029 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 100.0, Avg cost: 147.56
+2017-07-28 19:07:11 030 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@dd8722, 265598=com.ib.position.Position@1c16549, 8314=com.ib.position.Position@ed2d03}
+2017-07-28 19:07:18 933 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 200.0, Avg cost: 147.56
+2017-07-28 19:07:18 933 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@dd8722, 265598=com.ib.position.Position@1c16549, 8314=com.ib.position.Position@346e87}
+2017-07-28 19:07:19 512 INFO  [Thread-2] IBClient:71 - Received Bid Price = 148.11
+2017-07-28 19:07:19 513 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:19 513 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.13
+2017-07-28 19:07:19 513 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:25 268 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.12
+2017-07-28 19:07:25 268 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.12, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:31 526 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.13
+2017-07-28 19:07:31 526 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:33 779 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.12
+2017-07-28 19:07:33 780 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.12, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:36 044 INFO  [Thread-2] IBClient:347 - Position. DU15046 - Symbol: IBM, SecType: STK, Currency: USD, Position: 300.0, Avg cost: 147.56666666666666
+2017-07-28 19:07:36 044 INFO  [Thread-2] IBClient:46 - Updated position:{236950077=com.ib.position.Position@dd8722, 265598=com.ib.position.Position@1c16549, 8314=com.ib.position.Position@f81334}
+2017-07-28 19:07:40 033 INFO  [Thread-2] IBClient:71 - Received Bid Price = 148.09
+2017-07-28 19:07:40 033 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.09, bidPrice_calculated = -1.0, midPoint_n225m = 148.11
+2017-07-28 19:07:40 033 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.11
+2017-07-28 19:07:40 033 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.11, askPrice_calculated = -1.0, midPoint_n225m = 148.1
+2017-07-28 19:07:43 539 INFO  [Thread-2] IBClient:71 - Received Bid Price = 148.11
+2017-07-28 19:07:43 539 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = 148.11
+2017-07-28 19:07:43 540 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.12
+2017-07-28 19:07:43 540 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.12, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:46 541 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.13
+2017-07-28 19:07:46 541 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:49 042 INFO  [Thread-2] IBClient:71 - Received Bid Price = 148.12
+2017-07-28 19:07:49 042 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.12, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:49 043 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.14
+2017-07-28 19:07:49 043 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.14, askPrice_calculated = -1.0, midPoint_n225m = 148.13
+2017-07-28 19:07:52 296 INFO  [Thread-2] IBClient:71 - Received Bid Price = 148.11
+2017-07-28 19:07:52 296 DEBUG [Thread-2] IBClient:55 - Updated info: bidPrice_n225m = 148.11, bidPrice_calculated = -1.0, midPoint_n225m = 148.12
+2017-07-28 19:07:52 296 INFO  [Thread-2] IBClient:74 - Received Ask Price = 148.13
+2017-07-28 19:07:52 296 DEBUG [Thread-2] IBClient:65 - Updated info: askPrice_n225m = 148.13, askPrice_calculated = -1.0, midPoint_n225m = 148.12
