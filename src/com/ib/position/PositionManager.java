@@ -43,6 +43,6 @@ public class PositionManager {
         } else {
             m_positions.put(conid, pos);
         }
-        LOG.info("Updated position:" + m_positions.toString());
+        LOG.info("Updated position:" + m_positions.get(pos.getContract().conid()).toString());
     }
 }

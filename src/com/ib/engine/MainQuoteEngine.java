@@ -30,7 +30,7 @@ public class MainQuoteEngine implements Runnable{
     }
     
     public static void main(String[] args) {
-        LOG.info("Starting Morgan Stanley Quote Test");
+        LOG.info("---------------------------Starting Morgan Stanley Quote Test---------------------------");
         
         //! [connect]
         m_client.getSocket().eConnect(HOST, PORT, CLIENTID);

@@ -26,12 +26,13 @@ public class OrderManager{
     private double dynamicOffset = Double.MAX_VALUE;
     private double staticOffset = Double.MAX_VALUE;
     
-    private HashMap<OrderidConidAction, Order> m_orderMap = null;
+    
+    private HashMap<Integer, OrderInfo> m_orderMap = null;
     
     public OrderManager( IBClient client){
         m_client = client;
         if(m_orderMap == null){
-            m_orderMap = new HashMap<OrderidConidAction, Order>();
+            m_orderMap = new HashMap<Integer, OrderInfo>();
         }
     }
     
@@ -48,43 +49,65 @@ public class OrderManager{
     
     public void requestOpenOrder(){
         m_client.getSocket().reqOpenOrders();
+        LOG.debug("Send reqOpenOrders()");
     }
     
-    public synchronized void updateOrder(OrderidConidAction orderidConidAction, Order order){
-        if(m_orderMap.containsKey(orderidConidAction)){
-            m_orderMap.replace(orderidConidAction, order);
+    public synchronized void updateOpenOrder(int orderId , Order order){
+        if(m_orderMap.containsKey(orderId)){
+            OrderInfo o = m_orderMap.get(orderId);
+            o.setOrder(order);
+            m_orderMap.replace(orderId, o);
         } else {
-            m_orderMap.put(orderidConidAction, order);
+            m_orderMap.put(orderId, new OrderInfo(order, Double.MAX_VALUE, Double.MAX_VALUE));
         }
+        LOG.debug("Updated open order. Order map: " + m_orderMap.get(orderId).getOrder().action() + " " + 
+                m_orderMap.get(orderId).getOrder().totalQuantity() + ", Filled: " + m_orderMap.get(orderId).getFilled());
+    }
+    
+    public synchronized void updateOrderStatus(int orderId, double filled, double remaining){
+        if(m_orderMap.containsKey(orderId)){
+            OrderInfo o = m_orderMap.get(orderId);
+            o.setFilled(filled);
+            o.setRemaining(remaining);
+            m_orderMap.replace(orderId, o);
+        }
+        // Do not update status if no orderid is found
+        LOG.debug("Updated open order. Order map: " + m_orderMap.get(orderId).getOrder().action() + " " + 
+                m_orderMap.get(orderId).getOrder().totalQuantity() + ", Filled: " + m_orderMap.get(orderId).getFilled());
     }
     
     public synchronized boolean verifyOrders(){
         LOG.info("Verifying orders...");
+        
+        if(m_orderMap.isEmpty()){
+            return true;
+        }
+        
         boolean foundBuy = false;
         boolean foundSell = false;
         
         ConfigReader configReader = ConfigReader.getInstance();
         int tradeConid = Integer.parseInt(configReader.getConfig(Configs.TRADE_CONID));
         
-        Iterator it = m_orderMap.entrySet().iterator();
+        Iterator it = m_orderMap.keySet().iterator();
         while(it.hasNext()){
-            OrderidConidAction tmp = (OrderidConidAction) it.next();
-            if(tmp.getConid() == tradeConid){
-                if(tmp.getAction() == Types.Action.BUY && foundBuy){
+            int orderId = (int) it.next();
+            OrderInfo tmp = m_orderMap.get(orderId);
+                if(tmp.getOrder().action() == Types.Action.BUY && foundBuy){
                     LOG.info("Found more than two BUY orders. Stop program IMMEDIATELY and correct manually.");
                     return false;
                 } else {
                     foundBuy = true;
                 }
                 
-                if(tmp.getAction() == Types.Action.SELL && foundSell){
+                if(tmp.getOrder().action() == Types.Action.SELL && foundSell){
                     LOG.info("Found more than two SELL orders. Stop program IMMEDIATELY and correct manually.");
                     return false;
                 } else {
                     foundSell = true;
                 }
-            }
         }
+        LOG.info("Verified orders.");
         return true;
     }
     

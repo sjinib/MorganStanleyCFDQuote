@@ -26,6 +26,7 @@ public class IBClient implements EWrapper {
         protected static QuoteManager m_quoteManager = null;
         protected static PositionManager m_positionManager = null;
         protected static OrderManager m_orderManager = null;
+        protected static Trader m_trader = null;
         
 	protected EReaderSignal readerSignal;
 	protected EClientSocket _clientSocket = null;
@@ -42,6 +43,7 @@ public class IBClient implements EWrapper {
             m_quoteManager = new QuoteManager(this);
             m_positionManager = new PositionManager(this);
             m_orderManager = new OrderManager(this);
+            m_trader = new Trader(this);
 	}
 	//! [socket_init]
 	public static IBClient getInstance() {
@@ -80,7 +82,7 @@ public class IBClient implements EWrapper {
             LOG.info("Starting IB Client");
             m_quoteManager.requestSourceData();
             m_positionManager.requestPosition();
-            IBClient.m_orderManager.startTrade();
+            m_trader.startTrade();
         }
 	
 	 //! [tickprice]
@@ -149,6 +151,7 @@ public class IBClient implements EWrapper {
                 LOG.debug("OrderStatus. Id: "+orderId+", Status: "+status+", Filled"+filled+", Remaining: "+remaining
                 +", AvgFillPrice: "+avgFillPrice+", PermId: "+permId+", ParentId: "+parentId+", LastFillPrice: "+lastFillPrice+
                 ", ClientId: "+clientId+", WhyHeld: "+whyHeld+", MktCapPrice: "+mktCapPrice);
+                m_orderManager.updateOrderStatus(orderId, filled, remaining);
                 
         }
 	//! [orderstatus]
@@ -163,8 +166,7 @@ public class IBClient implements EWrapper {
 			order.action()+", "+order.orderType()+" "+order.totalQuantity()+", "+orderState.status());
                 if(contract.conid() == Integer.parseInt(ConfigReader.getInstance().getConfig(Configs.TRADE_CONID))){
                     // Only takes order info for the TRADE CONID
-                    OrderidConidAction orderidConidAction = new OrderidConidAction(orderId, contract.conid(), order.action());
-                    m_orderManager.updateOrder(orderidConidAction, order);
+                    m_orderManager.updateOpenOrder(orderId, order);
                 }
         }
 	//! [openorder]

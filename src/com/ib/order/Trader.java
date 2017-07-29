@@ -30,7 +30,5 @@ public class Trader {
         if(!orderManager.verifyOrders()){
             return;
         }
-        
-        
     }
 }

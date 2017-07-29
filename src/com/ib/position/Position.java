@@ -40,5 +40,8 @@ public class Position {
         return avgCost;
     }
     
-    
+    @Override
+    public String toString(){
+        return contract.conid() + "-" + pos;
+    }
 }
