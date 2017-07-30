@@ -16,6 +16,9 @@ import com.ib.quote.QuoteManager;
 import com.ib.position.*;
 import com.ib.client.Contract;
 import com.ib.client.OrderType;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,6 +33,7 @@ public class OrderManager{
     
     public static final Object OPENORDERLOCK = new Object();
     private static final Object ORDERACCESSLOCK = new Object();
+    public static final Object CANCELORDERLOCK = new Object();
     
     private IBClient m_client = null; 
     private int tradeConid = Integer.MAX_VALUE;
@@ -41,6 +45,7 @@ public class OrderManager{
     private HashMap<Integer, OrderInfo> m_orderMap = null;
     private int buyOrderId = Integer.MAX_VALUE;
     private int sellOrderId = Integer.MAX_VALUE;
+    private List pendingCancelList = null;
     
     public OrderManager( IBClient client){
         m_client = client;
@@ -55,6 +60,9 @@ public class OrderManager{
         }
         if(m_quoteManager == null){
             m_quoteManager = m_client.getQuoteManager();
+        }
+        if(pendingCancelList == null){
+            pendingCancelList = new ArrayList<Integer>();
         }
     }
     
@@ -84,6 +92,12 @@ public class OrderManager{
                         m_orderMap.get(orderId).getOrder().totalQuantity() + ", Filled: " + m_orderMap.get(orderId).getFilled());
             } else {
                 m_orderMap.put(orderId, new OrderInfo(order, Double.MAX_VALUE, Double.MAX_VALUE));
+                verifyOrders();
+                if(order.action() == Types.Action.BUY){
+                    buyOrderId = orderId;
+                } else if(order.action() == Types.Action.SELL){
+                    sellOrderId = orderId;
+                }
                 LOG.debug("Added open order. Order: " + m_orderMap.get(orderId).getOrder().action() + " " +
                         m_orderMap.get(orderId).getOrder().totalQuantity());
             }
@@ -99,8 +113,29 @@ public class OrderManager{
                 m_orderMap.replace(orderId, o);
                 LOG.debug("Updated order status. Order: " + m_orderMap.get(orderId).getOrder().action() + " " +
                     m_orderMap.get(orderId).getOrder().totalQuantity() + ", Filled: " + m_orderMap.get(orderId).getFilled());
+                
+                if(filled > 0.0){
+                    // Partial fill occurred
+                    synchronized(Trader.ORDERFILLMONITORLOCK){
+                        if(!pendingCancelList.contains(orderId)){
+                            pendingCancelList.add(orderId);
+                            Trader.ORDERFILLMONITORLOCK.notifyAll();
+                            LOG.debug("Added orderId " + orderId + " to pending cancel list. Notifying Trader");
+                        }                        
+                    }
+                }
             }
             // Do not update status if no orderid is found
+        }
+    }
+    
+    public void processExecDetails(int orderId){
+        synchronized(Trader.ORDERFILLMONITORLOCK){
+            if(!pendingCancelList.contains(orderId)){
+                pendingCancelList.add(orderId);
+                Trader.ORDERFILLMONITORLOCK.notifyAll();
+                LOG.debug("Added orderId " + orderId + " to pending cancel list. Notifying Trader");
+            }
         }
     }
     
@@ -135,51 +170,60 @@ public class OrderManager{
             placeNewSellOrder();
             return true;
         } else {
-            boolean foundBuy = false;
-            boolean foundSell = false;
-            
-            Iterator it = m_orderMap.keySet().iterator();
-            while(it.hasNext()){
-                int orderId = (int) it.next();
-                OrderInfo tmp = m_orderMap.get(orderId);
-                if(tmp.getOrder().action() == Types.Action.BUY){
-                    if(foundBuy){
-                        LOG.error("Found more than two BUY orders for conid = " + tradeConid + ", stopping program...");
-                        System.exit(0);
-                    } else {
-                        buyOrderId = orderId;
-                        foundBuy = true;
-                    }
-                } else if(tmp.getOrder().action() == Types.Action.SELL){
-                    if(foundSell){
-                        LOG.error("Found more than two SELL orders for conid = " + tradeConid + ", stopping program...");
-                        System.exit(0);
-                    } else {
-                        sellOrderId = orderId;
-                        foundSell = true;
-                    }
-                }
-            }
+            verifyOrders();
             
             // handle buy side order
-            if(foundBuy){
-                LOG.info("One BUY order is found. Updating order attributes");
-                updateCurrentBuyOrder();
+            if(buyOrderId < Integer.MAX_VALUE){
+                LOG.info("One BUY order is found. ");
+                OrderInfo buyOrderInfo = m_orderMap.get(buyOrderId);
+                if(buyOrderInfo.getFilled() > 0.0){
+                    LOG.info("BUY order is partially filled, cancel and replace new order");
+                    cancelCurrentOrderAndPlaceNewOrder(buyOrderId);
+                } else {
+                    updateCurrentBuyOrder();
+                }
             } else {
                 LOG.info("No BUY order is found. Placing new BUY order");
                 placeNewBuyOrder();
             }
             
-            if(foundSell){
-                LOG.info("One SELL order is found. Updating order attributes");
-                updateCurrentSellOrder();
+            if(sellOrderId < Integer.MAX_VALUE){
+                LOG.info("One SELL order is found. ");
+                OrderInfo sellOrderInfo = m_orderMap.get(sellOrderId);
+                if(sellOrderInfo.getFilled() > 0.0){
+                    LOG.info("Sell order is partially filled, cancel and replace new order");
+                    cancelCurrentOrderAndPlaceNewOrder(sellOrderId);
+                } else {
+                    updateCurrentSellOrder();
+                }
             } else {
-                LOG.info("No SELL order is found. Placing new BUY order");
+                LOG.info("No SELL order is found. Placing new SELL order");
                 placeNewSellOrder();
             }
             
             return true;
         }        
+    }
+    
+    private void verifyOrders(){        
+        Iterator it = m_orderMap.keySet().iterator();
+        while(it.hasNext()){
+            int orderId = (int) it.next();
+            OrderInfo tmp = m_orderMap.get(orderId);
+            if(tmp.getOrder().action() == Types.Action.BUY){
+                if(buyOrderId < Integer.MAX_VALUE && buyOrderId != orderId){
+                    LOG.error("Found more than two BUY orders for conid = " + tradeConid + ", stopping program...");
+                    System.exit(0);
+                }
+            } else if(tmp.getOrder().action() == Types.Action.SELL){
+                if(sellOrderId < Integer.MAX_VALUE && sellOrderId != orderId){
+                    LOG.error("Found more than two SELL orders for conid = " + tradeConid + ", stopping program...");
+                    System.exit(0);
+                }
+            }
+        }
+        
+        LOG.debug("Orders are verified");
     }
     
     private void findTradeConid(){
@@ -237,6 +281,7 @@ public class OrderManager{
                 Contract tradeContract = getTradeContract();
                 Order order = getLimitOrder(Types.Action.BUY, totalQuantity, tradeBidPrice, account);
                 m_client.getSocket().placeOrder(orderId, tradeContract, order);
+                buyOrderId = orderId;
                 LOG.info("Placed " + order.action() + " order (" + orderId + ") for " + tradeContract.conid() + "@" + tradeContract.exchange() + ": " + 
                         totalQuantity + "@" + tradeBidPrice);
             }
@@ -280,6 +325,7 @@ public class OrderManager{
                 Contract tradeContract = getTradeContract();
                 Order order = getLimitOrder(Types.Action.SELL, totalQuantity, tradeAskPrice, account);
                 m_client.getSocket().placeOrder(orderId, tradeContract, order);
+                sellOrderId = orderId;
                 LOG.info("Placed " + order.action() + " order (" + orderId + ") for " + tradeContract.conid() + "@" + tradeContract.exchange() + ": " + 
                         totalQuantity + "@" + tradeAskPrice);
             }
@@ -289,19 +335,95 @@ public class OrderManager{
     }
     
     private void updateCurrentBuyOrder(){
-        
+        // Buy order should be placed on the trade bid price
+        try{
+            double tradeBidPrice = m_quoteManager.getTradeBidPrice();
+            while(tradeBidPrice < 0){
+                LOG.debug("Cannot get trade bid price. Try again in 200 ms...");
+                Thread.sleep(200);
+            }
+            
+            // Only update price but not quantity, partial filled orders should be cancelled
+            
+            Order currentBuyOrder = m_orderMap.get(buyOrderId).getOrder();
+            if(currentBuyOrder.lmtPrice() != tradeBidPrice){
+                Contract tradeContract = getTradeContract();
+                currentBuyOrder.lmtPrice(tradeBidPrice);
+                m_client.getSocket().placeOrder(buyOrderId, tradeContract, currentBuyOrder);
+                LOG.info("Modified " + currentBuyOrder.action() + " order (" + currentBuyOrder + ") for " + tradeContract.conid() + "@" + tradeContract.exchange() + ": " +
+                    currentBuyOrder.totalQuantity() + "@" + tradeBidPrice);
+            } else {
+                LOG.debug("Current BUY order is up-to-date with the current market");
+            }
+        } catch (Exception e){
+            LOG.error(e.getMessage(), e);
+        }
     }
     
     private void updateCurrentSellOrder(){
-        
+        // Sell order should be placed on the trade ask price
+        try{
+            double tradeAskPrice = m_quoteManager.getTradeAskPrice();
+            while(tradeAskPrice < 0){
+                LOG.debug("Cannot get trade bid price. Try again in 200 ms...");
+                Thread.sleep(200);
+            }
+            
+            // Only update price but not quantity, partial filled orders should be cancelled
+            
+            Order currentSellOrder = m_orderMap.get(sellOrderId).getOrder();
+            if(currentSellOrder.lmtPrice() != tradeAskPrice){
+                Contract tradeContract = getTradeContract();
+                currentSellOrder.lmtPrice(tradeAskPrice);
+                m_client.getSocket().placeOrder(sellOrderId, tradeContract, currentSellOrder);
+                LOG.info("Modified " + currentSellOrder.action() + " order (" + currentSellOrder + ") for " + tradeContract.conid() + "@" + tradeContract.exchange() + ": " +
+                    currentSellOrder.totalQuantity() + "@" + tradeAskPrice);
+            } else {
+                LOG.debug("Current SELL order is up-to-date with the current market");
+            }
+        } catch (Exception e){
+            LOG.error(e.getMessage(), e);
+        }
     }
     
-    private void cancelCurrentBuyOrder(){
+    public void cancelCurrentOrderAndPlaceNewOrder(int orderId){
+        if(!m_orderMap.containsKey(orderId)){
+            this.requestOpenOrder();
+            try{
+                Thread.sleep(200);
+            } catch (Exception e){
+                LOG.error(e.getMessage(), e);
+            }
+        }
         
-    }
-    
-    private void cancelCurrentSellOrder(){
-        
+        if(!m_orderMap.containsKey(orderId)){
+            LOG.error("Cannot find orderId = " + orderId + " for cancellation");
+            return;
+        }
+        LOG.debug("Order id = " + orderId + " has been added to pending cancel list");
+        m_client.getSocket().cancelOrder(orderId);
+        synchronized(CANCELORDERLOCK){
+            try {
+                LOG.debug("Waiting for cancel order confirmation...");
+                CANCELORDERLOCK.wait();
+                // TODO
+                // What if cancel is failed
+                // Handle system cancel
+            } catch (Exception e){
+                LOG.error(e.getMessage(), e);
+            }
+        }
+        LOG.debug("Received order cancel confirmation. Removing order info from map");
+        pendingCancelList.remove(orderId);
+        if(m_orderMap.get(orderId).getOrder().action() == Types.Action.BUY){
+            buyOrderId = Integer.MAX_VALUE;
+            m_orderMap.remove(orderId);
+            placeNewBuyOrder();
+        } else if (m_orderMap.get(orderId).getOrder().action() == Types.Action.SELL){
+            sellOrderId = Integer.MAX_VALUE;
+            m_orderMap.remove(orderId);
+            placeNewSellOrder();
+        }        
     }
     
     private Contract getTradeContract(){
@@ -325,5 +447,13 @@ public class OrderManager{
         order.lmtPrice(lmtPrice);
         order.account(account);
         return order;
+    }
+    
+    public List getPendingCancelList(){
+        return pendingCancelList;
+    }
+    
+    public void clearPendingCancelList(){
+        pendingCancelList.clear();
     }
 }

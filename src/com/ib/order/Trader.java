@@ -9,8 +9,8 @@ import com.ib.api.IBClient;
 import org.apache.log4j.Logger;
 import com.ib.quote.QuoteManager;
 import com.ib.position.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +18,8 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Trader {
     private static final Logger LOG = Logger.getLogger(OrderManager.class);
+    
+    public static final Object ORDERFILLMONITORLOCK = new Object();
     
     private IBClient m_client = null; 
     
@@ -46,6 +48,27 @@ public class Trader {
         if(!orderManager.verifyAndInitializeOrders()){
             LOG.debug("Abnormal order detected. Please correct order manually. Stoping program.");
             System.exit(0);
+        }
+        
+        while(true){
+            synchronized(ORDERFILLMONITORLOCK){
+                try{
+                    LOG.debug("Trader waiting for notification when order is added to cancel list...");
+                    ORDERFILLMONITORLOCK.wait();
+                } catch (Exception e){
+                    LOG.error(e.getMessage(), e);
+                }
+                
+                LOG.debug("Trader notified about new order needs to be cancelled");
+                List<Integer> pendingCancelList = (ArrayList<Integer>) orderManager.getPendingCancelList();
+                if(!pendingCancelList.isEmpty()){
+                    for(Integer orderId : pendingCancelList){
+                        orderManager.cancelCurrentOrderAndPlaceNewOrder(orderId);
+                    }
+                    orderManager.clearPendingCancelList();
+                }
+            }
+            
         }
     }
 

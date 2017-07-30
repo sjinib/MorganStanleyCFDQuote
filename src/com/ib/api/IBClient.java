@@ -16,6 +16,7 @@ import com.ib.config.Configs;
 import com.ib.quote.QuoteManager;
 import com.ib.position.*;
 import com.ib.order.*;
+import java.util.ArrayList;
 
 public class IBClient implements EWrapper {
         private static final Logger LOG = Logger.getLogger(IBClient.class);
@@ -160,10 +161,18 @@ public class IBClient implements EWrapper {
 		//System.out.println("OrderStatus. Id: "+orderId+", Status: "+status+", Filled"+filled+", Remaining: "+remaining
                 //+", AvgFillPrice: "+avgFillPrice+", PermId: "+permId+", ParentId: "+parentId+", LastFillPrice: "+lastFillPrice+
                 //", ClientId: "+clientId+", WhyHeld: "+whyHeld+", MktCapPrice: "+mktCapPrice);
-                LOG.debug("OrderStatus. Id: "+orderId+", Status: "+status+", Filled"+filled+", Remaining: "+remaining
+                LOG.debug("OrderStatus. Id: "+orderId+", Status: "+status+", Filled: "+filled+", Remaining: "+remaining
                 +", AvgFillPrice: "+avgFillPrice+", PermId: "+permId+", ParentId: "+parentId+", LastFillPrice: "+lastFillPrice+
                 ", ClientId: "+clientId+", WhyHeld: "+whyHeld+", MktCapPrice: "+mktCapPrice);
-                m_orderManager.updateOrderStatus(orderId, filled, remaining);
+                
+                if(status.equalsIgnoreCase("Cancelled")){
+                    synchronized(OrderManager.CANCELORDERLOCK){
+                        OrderManager.CANCELORDERLOCK.notifyAll();
+                        LOG.debug("Received order cancel status, notifying Order Manager.");
+                    }
+                } else {
+                    m_orderManager.updateOrderStatus(orderId, filled, remaining);
+                }
                 
         }
 	//! [orderstatus]
@@ -241,7 +250,7 @@ public class IBClient implements EWrapper {
 	public void nextValidId(int orderId) {
 		//System.out.println("Next Valid Id: ["+orderId+"]");
 		currentOrderId = orderId;
-                LOG.info("Next Valid Id: ["+orderId+"]");
+                LOG.debug("Next Valid Id: ["+orderId+"]");
 	}
 	//! [nextvalidid]
 	
@@ -265,8 +274,13 @@ public class IBClient implements EWrapper {
 	//! [execdetails]
 	@Override
 	public void execDetails(int reqId, Contract contract, Execution execution) {
-		System.out.println("ExecDetails. "+reqId+" - ["+contract.symbol()+"], ["+contract.secType()+"], ["+contract.currency()+"], ["+execution.execId()+"], ["+execution.orderId()+"], ["+execution.shares()+"]");
-	}
+		//System.out.println("ExecDetails. "+reqId+" - ["+contract.symbol()+"], ["+contract.secType()+"], ["+contract.currency()+"], ["+execution.execId()+"], ["+execution.orderId()+"], ["+execution.shares()+"]");
+                LOG.debug("ExecDetails. "+reqId+" - ["+contract.symbol()+"], ["+contract.secType()+"], ["+contract.currency()+"], ["+execution.execId()+"], ["+execution.orderId()+"], ["+execution.shares()+"]");
+                
+                int orderId = execution.orderId();
+                m_orderManager.processExecDetails(orderId);
+                
+        }
 	//! [execdetails]
 	
 	//! [execdetailsend]
@@ -482,6 +496,14 @@ public class IBClient implements EWrapper {
 	public void error(int id, int errorCode, String errorMsg) {
 		//System.out.println("Error. Id: " + id + ", Code: " + errorCode + ", Msg: " + errorMsg + "\n");
                 LOG.error("Error. Id: " + id + ", Code: " + errorCode + ", Msg: " + errorMsg);
+                
+                List pendingCancelList = (ArrayList<Integer>) m_orderManager.getPendingCancelList();
+                if(errorCode == 202 && pendingCancelList.contains(id)){
+                    synchronized(OrderManager.CANCELORDERLOCK){
+                        OrderManager.CANCELORDERLOCK.notifyAll();
+                        LOG.debug("Received order cancel status, notifying Order Manager.");
+                    }
+                }
 	}
 	//! [error]
 	@Override
