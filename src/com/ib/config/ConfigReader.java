@@ -27,7 +27,9 @@ public class ConfigReader {
     private Properties m_prop = new Properties();
     private InputStream input = null;
     
-    private ConfigReader(){}
+    private ConfigReader(){
+        readProperties();
+    }
     
     public void readProperties(){
         try{
@@ -61,6 +63,9 @@ public class ConfigReader {
     
     public String getConfig(String key){
         // null is returned if no key is found
+        if(m_config == null){
+            readProperties();
+        }
         return m_config.get(key);
     }
     

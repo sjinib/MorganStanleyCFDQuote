@@ -18,3 +18,13 @@ Work flow:
 Next step:
 OpenOrder lock for OrderManager
 Position lock for PositionManager
+
+Need to find a way to request open order at start and wait until all open orders are returned and verify -> determine what to do next
+
+Questions:
+1. Price calculation based on position offset
+2. STATIC_OFFSET
+3. PositionAdjustment
+
+Questions:
+1. Do you want to add maximum quantity precaution?

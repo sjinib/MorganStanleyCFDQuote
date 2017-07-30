@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.ib.config.*;
 import com.ib.client.Contract;
 import java.text.DecimalFormat;
+import com.ib.position.*;
 
 /**
  *
@@ -21,13 +22,20 @@ public class QuoteManager {
     
     private static final Logger LOG = Logger.getLogger(QuoteManager.class);
     
+    public static final Object QUOTELOCK = new Object();
+    private static final Object QUOTEACCESSLOCK = new Object();
+    
     private IBClient m_client = null;
     
-    private double bidPrice_n225m = -1;
-    private double askPrice_n225m = -1;
-    private double midPoint_n225m = -1;
-    private double bidPrice_calculated = -1;
-    private double askPrice_calculated = -1;
+    private double sourceBidPrice = -1.0;
+    private double sourceAskPrice = -1.0;
+    private double sourceMidpoint = -1.0;
+    private double tradeBidPrice = -1.0;
+    private double tradeAskPrice = -1.0;
+    
+    private int sourceConid = Integer.MAX_VALUE;
+    private String sourceExchange = null;
+    private double staticOffset = Double.MAX_VALUE;
     
     private DecimalFormat df = new DecimalFormat("#.##");
     
@@ -36,7 +44,6 @@ public class QuoteManager {
         m_client = client;
         if(m_configReader == null){
             m_configReader = ConfigReader.getInstance();
-            m_configReader.readProperties();
         }
     }
     
@@ -46,43 +53,108 @@ public class QuoteManager {
         LOG.debug("Sent market data request for source contract. ConId = " + sourceContract.conid());
     }
     
-    public synchronized void updateBidPrice(double price){
-        bidPrice_n225m = price;
-        if(askPrice_n225m != -1){
-            midPoint_n225m = (bidPrice_n225m + askPrice_n225m)/2.0;
-            midPoint_n225m = Double.valueOf(df.format(midPoint_n225m));
+    public void updateBidPrice(double price){
+        synchronized(QUOTEACCESSLOCK){
+            sourceBidPrice = price;
+            if(sourceAskPrice != -1.0){
+                sourceMidpoint = (sourceBidPrice + sourceAskPrice)/2.0;
+                sourceMidpoint = Double.valueOf(df.format(sourceMidpoint));
+            }
+            LOG.debug("Updated info: sourceBidPrice = " + sourceBidPrice + ", tradeBidPrice = " + tradeBidPrice +
+                    ", sourceMidpoint = " + sourceMidpoint);
+            calculateTradeBidPrice();
         }
-        LOG.debug("Updated info: bidPrice_n225m = " + bidPrice_n225m + ", bidPrice_calculated = " + bidPrice_calculated + 
-                ", midPoint_n225m = " + midPoint_n225m);
     }
     
-    public synchronized void updateAskPrice(double price){
-        askPrice_n225m = price;
-        if(bidPrice_n225m != -1){
-            midPoint_n225m = (bidPrice_n225m + askPrice_n225m)/2.0;
-            midPoint_n225m = Double.valueOf(df.format(midPoint_n225m));
+    public void updateAskPrice(double price){
+        synchronized(QUOTEACCESSLOCK){
+            sourceAskPrice = price;
+            if(sourceBidPrice != -1.0){
+                sourceMidpoint = (sourceBidPrice + sourceAskPrice)/2.0;
+                sourceMidpoint = Double.valueOf(df.format(sourceMidpoint));
+            }
+            LOG.debug("Updated info: sourceAskPrice = " + sourceAskPrice + ", tradeAskPrice = " + tradeAskPrice +
+                    ", sourceMidpoint = " + sourceMidpoint);
+            calculateTradeAskPrice();
         }
-        LOG.debug("Updated info: askPrice_n225m = " + askPrice_n225m + ", askPrice_calculated = " + askPrice_calculated + 
-                ", midPoint_n225m = " + midPoint_n225m);
     }
     
-    public synchronized double getCalculatedBidPrice(){
-        LOG.debug("Returning calculated bid price = " + bidPrice_calculated);
-        return this.bidPrice_calculated;
+    public boolean calculateTradeBidPrice(){
+        if(staticOffset == Double.MAX_VALUE){
+            staticOffset = Double.parseDouble(m_configReader.getConfig(Configs.STATIC_OFFSET));
+        }
+        
+        double dynamicOffset = m_client.getPositionManager().getDynamicOffset();
+        if(sourceBidPrice != -1 && dynamicOffset != Double.MAX_VALUE){
+            tradeBidPrice = Double.valueOf(df.format(sourceBidPrice + staticOffset + dynamicOffset)); 
+            LOG.debug("Calculated trade bid price = " + sourceBidPrice + "(sourceBidPrice) + " + 
+                    staticOffset + "(staticOffset) + " + dynamicOffset + "(dynamicOffset) = " + tradeBidPrice);
+            return true;
+        } else {
+            LOG.debug("Failed to calculate trade bid price because either source bid price or dynamic offset is missing");
+            return false;
+        }
     }
     
-    public synchronized double getCalculatedAskPrice(){
-        LOG.debug("Returning calculated ask price = " + askPrice_calculated);
-        return this.askPrice_calculated;
+    public boolean calculateTradeAskPrice(){
+        if(staticOffset == Double.MAX_VALUE){
+            staticOffset = Double.parseDouble(m_configReader.getConfig(Configs.STATIC_OFFSET));
+        }
+        
+        double dynamicOffset = m_client.getPositionManager().getDynamicOffset();
+        if(sourceAskPrice != -1 && dynamicOffset != Double.MAX_VALUE){
+            tradeAskPrice = Double.valueOf(df.format(sourceAskPrice + staticOffset + dynamicOffset)); 
+            LOG.debug("Calculated trade ask price = " + sourceAskPrice + "(sourceAskPrice) + " + 
+                    staticOffset + "(staticOffset) + " + dynamicOffset + "(dynamicOffset) = " + tradeAskPrice);
+            return true;
+        } else {
+            LOG.debug("Failed to calculate trade ask price because either source ask price or dynamic offset is missing");
+            return false;
+        }
+    }
+    
+    public double getTradeBidPrice(){
+        synchronized(QUOTEACCESSLOCK){
+            return this.tradeBidPrice;
+        }
+    }
+    
+    public double getTradeAskPrice(){
+        synchronized(QUOTEACCESSLOCK){
+            return this.tradeAskPrice;
+        }
     }
     
     private Contract getSourceContract(){
-        String sourceConid = m_configReader.getConfig(Configs.SOURCE_CONID);
+        if(sourceConid == Integer.MAX_VALUE){
+            sourceConid = Integer.parseInt(m_configReader.getConfig(Configs.SOURCE_CONID));
+        }
+        if(sourceExchange == null){
+            sourceExchange = m_configReader.getConfig(Configs.SOURCE_EXCHANGE);
+        }
         Contract sourceContract = new Contract();
-        sourceContract.conid(Integer.parseInt(sourceConid));
-        sourceContract.exchange("SMART");
-        // PRODUCTION_CHANGE
-        //sourceContract.exchange("OSE.JPN");
+        sourceContract.conid(sourceConid);
+        sourceContract.exchange(sourceExchange);
         return sourceContract;
+    }
+    
+    public boolean confirmTickTypesReceived(){
+        LOG.debug("Verifying if all tick types are received for order placement...");
+        
+        synchronized(QUOTELOCK){
+            while(sourceBidPrice == -1.0 || sourceAskPrice == -1.0 || sourceMidpoint == -1.0 ||
+                    tradeBidPrice == -1.0 || tradeAskPrice == -1.0){
+                try {
+                    LOG.debug("Waiting for more quotes to be received...");
+                    QUOTELOCK.wait();
+                } catch (Exception e){
+                    LOG.error(e.getMessage(), e);
+                    return false;
+                }
+            }
+        }
+        
+        LOG.debug("Confirm all tick types are received.");
+        return true;
     }
 }

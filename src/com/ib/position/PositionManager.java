@@ -6,6 +6,8 @@
 package com.ib.position;
 
 import com.ib.api.IBClient;
+import com.ib.config.ConfigReader;
+import com.ib.config.Configs;
 import org.apache.log4j.Logger;
 import java.util.HashMap;
 
@@ -15,6 +17,14 @@ import java.util.HashMap;
  */
 public class PositionManager {
     private static final Logger LOG = Logger.getLogger(PositionManager.class);
+    private static ConfigReader m_configReader = null;
+    
+    public static final Object POSITIONLOCK = new Object();
+    private static final Object POSITIONACCESSLOCK = new Object();
+    
+    private int sourceConid = Integer.MAX_VALUE;
+    private double distortionRate = Double.MAX_VALUE;
+    private double dynamicOffset = Double.MAX_VALUE;
     
     private IBClient m_client = null;
     
@@ -24,6 +34,10 @@ public class PositionManager {
         LOG.info("Initializing Position Manager");
         m_client = client;
         m_positions = new HashMap<Integer, Position>();
+        
+        if(m_configReader == null){
+            m_configReader = ConfigReader.getInstance();
+        }
     }
     
     public void requestPosition(){
@@ -31,18 +45,59 @@ public class PositionManager {
         LOG.info("Sent reqPositions()");
     }
     
-    public synchronized double getPosition(int conid){
-        Position pos = m_positions.get(conid);
-        return pos == null ? 0.0 : pos.getPos();
+    public double getPosition(){
+        synchronized(POSITIONACCESSLOCK){
+            if(sourceConid == Integer.MAX_VALUE){
+                sourceConid = Integer.parseInt(m_configReader.getConfig(Configs.TRADE_CONID));
+            }
+            Position pos = m_positions.get(sourceConid);
+            return pos == null ? 0.0 : pos.getPos();
+        }
     }
     
     public synchronized void updatePosition(Position pos){
-        int conid = pos.getContract().conid();
-        if(m_positions.containsKey(conid)){
-            m_positions.replace(conid, pos);
-        } else {
-            m_positions.put(conid, pos);
+        synchronized(POSITIONACCESSLOCK){
+            int conid = pos.getContract().conid();
+            if(m_positions.containsKey(conid)){
+                m_positions.replace(conid, pos);
+            } else {
+                m_positions.put(conid, pos);
+            }
+            LOG.info("Updated position:" + m_positions.get(pos.getContract().conid()).toString());
         }
-        LOG.info("Updated position:" + m_positions.get(pos.getContract().conid()).toString());
+    }
+    
+    public boolean confirmAllPositionReceived(){
+        LOG.debug("Verifying positions...");
+        
+        synchronized(POSITIONLOCK){
+            try {
+                LOG.debug("Waiting for position end to be received...");
+                POSITIONLOCK.wait();
+            } catch (Exception e){
+                LOG.error(e.getMessage(), e);
+                return false;
+            }
+        }
+        
+        LOG.debug("PositionEnd is received, calculating dynamicOffset");
+        
+        return calculateDynamicOffset();
+    }
+    
+    private boolean calculateDynamicOffset(){
+        if(distortionRate == Double.MAX_VALUE){
+            distortionRate = Double.parseDouble(m_configReader.getConfig(Configs.DISTORTION_RATE));
+        }
+        
+        dynamicOffset = -1.0 * getPosition() * distortionRate;
+        
+        LOG.debug("Calculated dynamicOffset = " + dynamicOffset);
+        
+        return true;
+    }
+    
+    public double getDynamicOffset(){
+        return dynamicOffset;
     }
 }

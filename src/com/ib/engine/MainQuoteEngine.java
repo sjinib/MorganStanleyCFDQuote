@@ -17,8 +17,8 @@ import com.ib.client.EReader;
 public class MainQuoteEngine implements Runnable{
     public static final Logger LOG = Logger.getLogger(MainQuoteEngine.class);
     
-    final static IBClient m_client = IBClient.getInstance();
-    final static EReaderSignal m_signal = m_client.getSignal();
+    private static IBClient m_client = null;
+    private static EReaderSignal m_signal = null;
             
     private static String HOST = "127.0.0.1";
     private static int PORT = 7496;
@@ -32,13 +32,16 @@ public class MainQuoteEngine implements Runnable{
     public static void main(String[] args) {
         LOG.info("---------------------------Starting Morgan Stanley Quote Test---------------------------");
         
+        m_client = IBClient.getInstance();
+        m_signal = m_client.getSignal();
+        
         //! [connect]
         m_client.getSocket().eConnect(HOST, PORT, CLIENTID);
         //! [connect]
         //! [ereader]
         final EReader reader = new EReader(m_client.getSocket(), m_signal);
         reader.start();
-        new Thread() {
+        new Thread("wrapper") {
             public void run() {
                 while (m_client.getSocket().isConnected()) {
                     m_signal.waitForSignal();
@@ -56,7 +59,7 @@ public class MainQuoteEngine implements Runnable{
                 Thread.sleep(200);
             }
             
-        new Thread(new MainQuoteEngine()).start();
+        new Thread(new MainQuoteEngine(), "trader").start();
             
         } catch (Exception e){
             LOG.error(e.getMessage(), e);

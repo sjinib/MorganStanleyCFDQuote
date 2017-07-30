@@ -60,9 +60,15 @@ public class IBClient implements EWrapper {
 	public EReaderSignal getSignal() {
 		return readerSignal;
 	}
+        
+        public int getCurrentOrderId(){
+            return currentOrderId;
+        }
 	
-	public int getCurrentOrderId() {
-		return currentOrderId;
+	public int getCurrentOrderIdAndIncrement() {
+                int orderId = currentOrderId;
+                currentOrderId++;
+		return orderId;
 	}
         
         public PositionManager getPositionManager(){
@@ -79,9 +85,7 @@ public class IBClient implements EWrapper {
         
         // Test start
         public void start(){
-            LOG.info("Starting IB Client");
-            m_quoteManager.requestSourceData();
-            m_positionManager.requestPosition();
+            LOG.info("Starting Trader thread");
             m_trader.startTrade();
         }
 	
@@ -91,9 +95,17 @@ public class IBClient implements EWrapper {
             if(TickType.get(field).equals(TickType.BID) && tickerId == QuoteManager.TICKERID){
                 LOG.debug("Received Bid Price = " + price);
                 m_quoteManager.updateBidPrice(price);
+                synchronized(QuoteManager.QUOTELOCK){
+                    QuoteManager.QUOTELOCK.notifyAll();
+                    LOG.debug("Received more tick price, notifying QuoteManager");
+                }
             } else if (TickType.get(field).equals(TickType.ASK) && tickerId == QuoteManager.TICKERID){
                 LOG.debug("Received Ask Price = " + price);
                 m_quoteManager.updateAskPrice(price);
+                synchronized(QuoteManager.QUOTELOCK){
+                    QuoteManager.QUOTELOCK.notifyAll();
+                    LOG.debug("Received more tick price, notifying QuoteManager");
+                }
             }
             //System.out.println("Tick Price. Ticker Id:"+tickerId+", Field: "+field+", Price: "+price+", CanAutoExecute: "+ attribs.canAutoExecute()
 		//+ ", pastLimit: " + attribs.pastLimit() + ", pre-open: " + attribs.preOpen());
@@ -162,11 +174,18 @@ public class IBClient implements EWrapper {
 			OrderState orderState) {
 		//System.out.println("OpenOrder. ID: "+orderId+", "+contract.symbol()+", "+contract.secType()+" @ "+contract.exchange()+": "+
 		//	order.action()+", "+order.orderType()+" "+order.totalQuantity()+", "+orderState.status());
+                
                 LOG.debug("OpenOrder. ID: "+orderId+", "+contract.symbol()+", "+contract.secType()+" @ "+contract.exchange()+": "+
 			order.action()+", "+order.orderType()+" "+order.totalQuantity()+", "+orderState.status());
                 if(contract.conid() == Integer.parseInt(ConfigReader.getInstance().getConfig(Configs.TRADE_CONID))){
                     // Only takes order info for the TRADE CONID
                     m_orderManager.updateOpenOrder(orderId, order);
+                }
+                
+                // Avoid Duplicate order id
+                if(orderId > currentOrderId){
+                    LOG.debug("Received orderId = " + orderId + " > currentOrderId = " + currentOrderId + ", updating currentOrderId.");
+                    currentOrderId = orderId + 1;
                 }
         }
 	//! [openorder]
@@ -176,6 +195,11 @@ public class IBClient implements EWrapper {
 	public void openOrderEnd() {
                 //System.out.println("OpenOrderEnd");
                 LOG.debug("OpenOrderEnd");
+                
+                synchronized(OrderManager.OPENORDERLOCK){
+                    OrderManager.OPENORDERLOCK.notifyAll();
+                    LOG.debug("Received OpenOrderEnd, notifying Order Manager.");
+                }
 	}
 	//! [openorderend]
 	
@@ -390,6 +414,10 @@ public class IBClient implements EWrapper {
 	@Override
 	public void positionEnd() {
 		//System.out.println("PositionEnd \n");
+                synchronized(PositionManager.POSITIONLOCK){
+                    PositionManager.POSITIONLOCK.notifyAll();
+                    LOG.debug("Received PositionEnd, notifying Position Manager.");
+                }
 	}
 	//! [positionend]
 	
